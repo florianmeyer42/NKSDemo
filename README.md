@@ -1,48 +1,60 @@
 ## Using Cloud Volumes ONTAP as persistant storage in a NKS Kubernetes Cluster
 
-## Objectives 
+## Objectives
 This exercise focuses on enabling you to do the following:
 - Create a simple service in a NKS deployed Kubernetes Cluster. As an example, this K8s deployment will create a simple Webservice, using nginx.
 
+## Requirements
+This exercise focuses on the deployment of a simple K8s service using NKS (NetApp Kubernetes Service) and CVO (Cloud Volumes ONTAP). It is required that you are a registered user of
+- NetApp Cloud Services: CVO and NKS
+- AWS (Amazon Web Services)
+
+### 1. export KUBECONFIG
+After you downloaded the kubeconfig.txt for your K8s cluster, use the file to export KUBECONFIG for your local kubectl client.
+
 ```
-export KUBECONFIG=kubeconfig.txt
+$ export KUBECONFIG=kubeconfig.txt
 ```
 
-### before connecting CVO Workspace with K8s Cluster
+### 2. Verify your K8s Cluster
+Some things to check before you connect a CVO instance with your Kubernetes Cluster.
+- Available Storage classes
+- Available persistant Volumes (PVs) and persistant Volume claims (PVCs)
+- Running pods in your namespace and in all namespaces
 
 ```
-kubectl get sc
+$ kubectl get sc
 
-kubectl get pv
+$ kubectl get pv
 
-kubectl get pods --all-namespaces
+$ kubectl get pods
+
+$ kubectl get pods --all-namespaces
 ```
 
 ### After K8S with connected with CVO in OCCM
 
 ```
-mac$ kubectl get sc
+$ kubectl get sc
 
-mac$ kubectl get pv
+$ kubectl get pv
 
-mac$ kubectl create -f NKSDemoPVCforNAS.yaml
+$ kubectl create -f NKSDemoPVCforNAS.yaml
 
-mac$ kubectl get pvc
+$ kubectl get pvc
 
-mac$ kubectl create -f NKSDemo_mynginx.yaml
-deployment.apps "my-nginx” created
+$ kubectl create -f NKSDemo_mynginx.yaml
 
-mac$ kubectl get pods
+$ kubectl get pods
 
-mac$ kubectl expose deployment my-nginx --type=LoadBalancer --name=my-service
+$ kubectl expose deployment my-nginx --type=LoadBalancer --name=my-service
 service "my-service” exposed
 
-mac$ kubectl describe service my-service
+$ kubectl describe service my-service
 
-mac$ kubectl get pods
+$ kubectl get pods
 
-
-mac$ kubectl exec -it my-nginx-b7b56756c-qdrhr sh
+$ kubectl exec -it my-nginx-b7b56756c-qdrhr sh
 # cd /usr/share/nginx/html
 
 # mount | grep trident
@@ -50,5 +62,5 @@ mac$ kubectl exec -it my-nginx-b7b56756c-qdrhr sh
 
 # echo "<h1>the quick brown fox jumps over the lazy dog on host $HOSTNAME </h1>" > index.html
 
-mac$ kubectl get pods
+$ kubectl get pods
 ```
