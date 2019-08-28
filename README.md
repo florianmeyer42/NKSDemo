@@ -18,21 +18,28 @@ $ export KUBECONFIG=kubeconfig.txt
 
 ### 2. Verify your K8s Cluster
 Some things to check before you connect a CVO instance with your Kubernetes Cluster.
+- Running nodes in your K8s Cluster
+- Running pods in your namespace and in all namespaces
 - Available Storage classes
 - Available persistant Volumes (PVs) and persistant Volume claims (PVCs)
-- Running pods in your namespace and in all namespaces
 
 ```
-$ kubectl get sc
-
-$ kubectl get pv
+$ kubectl get nodes
 
 $ kubectl get pods
 
 $ kubectl get pods --all-namespaces
+
+$ kubectl get sc
+
+$ kubectl get pv
+
+$ kubectl get pvc
+
 ```
 
-### After K8S with connected with CVO in OCCM
+### Deploy CVO instance and connect with K8s cluster
+Go o Cloud Central, create a new Cloudmanager and CVO instance in the same rewgion where you created your K8s cluster. Connect your K8s cluster with your CVO instance in Cloud Manger. This is not covered here. Now after sucessful creation 
 
 ```
 $ kubectl get sc
