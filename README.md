@@ -39,7 +39,7 @@ $ kubectl get pvc
 ```
 
 ### Deploy CVO instance and connect with K8s cluster
-Go o Cloud Central, create a new Cloudmanager and CVO instance in the same rewgion where you created your K8s cluster. Connect your K8s cluster with your CVO instance in Cloud Manger. This is not covered here. Now after sucessful creation 
+Go to Cloud Central, create a new Cloudmanager and CVO instance in the same rewgion where you created your K8s cluster. Connect your K8s cluster with your CVO instance in Cloud Manger. This is not covered here. Now after sucessful creation 
 
 ```
 $ kubectl get sc
